@@ -1,0 +1,31 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request: # To aktywuje testy przy każdym PR (Punkt 4)
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalacja bibliotek
+        run: npm install
+
+      - name: Uruchomienie testów i generowanie raportu
+        run: npm run test:ci
+
+      - name: Publikacja raportu (jako artefakt)
+        uses: actions/upload-artifact@v4
+        if: always() # Raport wyśle się nawet jak testy padną
+        with:
+          name: raport-testow
+          path: junit.xml
