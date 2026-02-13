@@ -16,6 +16,19 @@ app.get('/products', (req, res) => {
   res.json(products);
 });
 
+const { createClient } = require('@supabase/supabase-js');
+
+const supabase = createClient(
+  process.env.SUPABASE_URL, 
+  process.env.SUPABASE_KEY
+);
+
+app.get('/products', async (req, res) => {
+  const { data, error } = await supabase.from('products').select('*');
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(data);
+});
+
 app.get('/api/welcome', (req, res) => {
     res.send('Witaj w projekcie zaliczeniowym WSEI!');
 });

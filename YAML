@@ -1,31 +1,26 @@
-name: CI/CD Pipeline
+name: CI Pipeline (Test & Report)
 
 on:
   push:
     branches: [ "main" ]
-  pull_request: # To aktywuje testy przy każdym PR (Punkt 4)
+  pull_request:
     branches: [ "main" ]
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Instalacja bibliotek
+      - name: Install dependencies
         run: npm install
 
-      - name: Uruchomienie testów i generowanie raportu
+      - name: Run Tests & Generate Report (Pkt 3 i 4)
         run: npm run test:ci
 
-      - name: Publikacja raportu (jako artefakt)
+      - name: Upload Test Report (Pkt 4c)
         uses: actions/upload-artifact@v4
-        if: always() # Raport wyśle się nawet jak testy padną
+        if: always()
         with:
           name: raport-testow
-          path: junit.xml
+          path: junit.xmlnpm install @supabase/supabase-js

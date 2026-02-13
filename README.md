@@ -13,7 +13,10 @@ Projekt zawiera pipeline CI/CD oraz konteneryzację.
 1. `docker build -t wsei-projekt-app .`
 2. `docker run -p 8080:3000 wsei-projekt-app`
 
+### Jak uruchomić testy
+1. npm run test:ci
+
 ### Funkcje (Punkty):
-- [x] Backlog w GitHub Projects (Pkt 1)
-- [x] Konteneryzacja (Pkt 7)
-- [x] Testy jednostkowe (Pkt 3)
+- [x] Backlog w GitHub Projects 
+- [x] Konteneryzacja 
+- [x] Testy jednostkowe 
