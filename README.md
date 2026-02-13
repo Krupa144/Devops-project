@@ -33,6 +33,6 @@ Projekt zaliczeniowy prezentujący pełny cykl życia aplikacji (CI/CD), kontene
 - **GitHub Actions (CI):** Automatyczny build i testy przy każdym Pull Requeście. Raporty z testów są zapisywane.
 - **Railway (CD):** Automatyczne wdrożenie po zmergowaniu zmian do gałęzi `main`.
 
-### 4. Bezpieczeństwo i Sekrety (Pkt 11)
+### 4. Bezpieczeństwo i Sekrety
 - **Zmienne środowiskowe:** Wykorzystanie `process.env` oraz biblioteki `dotenv`.
 - **Sekrety:** Wrażliwe dane (klucze Supabase) przechowywane w **GitHub Secrets** oraz **Railway Variables**.
