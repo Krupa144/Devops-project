@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchWelcomeMessage();
     fetchProducts();
@@ -5,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchWelcomeMessage() {
     try {
-        // Zmienione na /api/welcome zgodnie z Twoim server.js
         const response = await fetch('/api/welcome');
         const text = await response.text();
         document.getElementById('welcome-message').innerText = text;

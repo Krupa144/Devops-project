@@ -1,48 +1,39 @@
+require('dotenv').config();
 const express = require('express');
-const path = require('path'); 
+const path = require('path');
+const { createClient } = require('@supabase/supabase-js');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-app.get('/products', (req, res) => {
-  const products = [
-    { id: 1, name: 'Laptop Gamingowy', price: 4500 },
-    { id: 2, name: 'Myszka Bezprzewodowa', price: 120 },
-    { id: 3, name: 'Klawiatura Mechaniczna', price: 350 },
-    { id: 4, name: 'Monitor 27"', price: 1200 }
-  ];
-  res.json(products);
-});
-
-const { createClient } = require('@supabase/supabase-js');
-
 const supabase = createClient(
-  process.env.SUPABASE_URL, 
-  process.env.SUPABASE_KEY
+    process.env.SUPABASE_URL, 
+    process.env.SUPABASE_KEY
 );
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/products', async (req, res) => {
-  const { data, error } = await supabase.from('products').select('*');
-  if (error) return res.status(500).json({ error: error.message });
-  res.json(data);
+    try {
+        const { data, error } = await supabase.from('products').select('*');
+        if (error) throw error;
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 app.get('/api/welcome', (req, res) => {
     res.send('Witaj w projekcie zaliczeniowym WSEI!');
 });
 
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+app.get(/.*/, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 
+app.listen(port, () => {
+    console.log(`http://localhost:${port}`);
+});
 
-if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`Aplikacja działa na porcie http://localhost:${port}`);
-  });
-}
-
-module.exports = app;
+module.exports = app; 

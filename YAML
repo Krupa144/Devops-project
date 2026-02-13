@@ -23,4 +23,9 @@ jobs:
         if: always()
         with:
           name: raport-testow
-          path: junit.xmlnpm install @supabase/supabase-js
+          path: junit.xml
+      - name: Uruchomienie testów i generowanie raportu
+        run: npm run test:ci
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
