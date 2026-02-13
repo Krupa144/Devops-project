@@ -1,22 +1,38 @@
-# Projekt Zaliczeniowy DevOps - Sklep WSEI
+# Sklep Internetowy - Projekt DevOps WSEI
 
-### Opis projektu
-Aplikacja webowa napisana w Node.js prezentująca listę produktów. 
-Projekt zawiera pipeline CI/CD oraz konteneryzację.
+Projekt zaliczeniowy prezentujący pełny cykl życia aplikacji (CI/CD), konteneryzację oraz integrację z chmurowymi bazami danych.
 
-### Jak uruchomić lokalnie:
-1. `npm install`
-2. `npm start`
-3. Aplikacja dostępna pod: `http://localhost:3000`
+## Linki
+- **Aplikacja Live:** devops-project-production-3a44.up.railway.app
+- **Baza danych:** Supabase 
 
-### Jak uruchomić w Dockerze:
-1. `docker build -t wsei-projekt-app .`
-2. `docker run -p 8080:3000 wsei-projekt-app`
+---
 
-### Jak uruchomić testy
-1. npm run test:ci
+## Technologie
+- **Backend:** Node.js
+- **Frontend:** HTML5, CSS3, JavaScript
+- **Baza danych:** Supabase
+- **Konteneryzacja:** Docker
+- **CI/CD:** GitHub Actions + Railway
 
-### Funkcje (Punkty):
-- [x] Backlog w GitHub Projects 
-- [x] Konteneryzacja 
-- [x] Testy jednostkowe 
+---
+
+## Realizacja punktów
+
+### 1. Zarządzanie projektem 
+- **Backlog:** Wykorzystano GitHub Projects do planowania zadań.
+- **Git Flow:** Praca na branchach (np. `feature/Shop`), wykorzystanie Pull Requestów oraz powiązanie commitów.
+
+### 2. Aplikacja i Testy 
+- **API:** Implementacja endpointów.
+- **Testy:** Testy jednostkowe napisane w frameworku.
+- **Raporty:** Automatyczne generowanie raportów (`junit.xml`) podczas każdego przebiegu Pipeline'u.
+
+### 3. CI/CD i Konteneryzacja 
+- **Docker:** Stworzono `Dockerfile'. Aplikacja jest skonteneryzowana.
+- **GitHub Actions (CI):** Automatyczny build i testy przy każdym Pull Requeście. Raporty z testów są zapisywane.
+- **Railway (CD):** Automatyczne wdrożenie po zmergowaniu zmian do gałęzi `main`.
+
+### 4. Bezpieczeństwo i Sekrety (Pkt 11)
+- **Zmienne środowiskowe:** Wykorzystanie `process.env` oraz biblioteki `dotenv`.
+- **Sekrety:** Wrażliwe dane (klucze Supabase) przechowywane w **GitHub Secrets** oraz **Railway Variables**.
